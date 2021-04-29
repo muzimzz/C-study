@@ -11,7 +11,7 @@ void print(int *n, int input)
 {
     int temp = 0;
 
-    for (i = 0; i < input; i++)
+    for (i = 0; i < input - 1; i++)
         for (j = 0; j < input - 1; j++)
         {
             if (n[j] > n[j + 1])
