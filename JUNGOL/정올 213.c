@@ -3,23 +3,23 @@
 #include <stdio.h>
 #include <string.h>
 
-//void insertion_sort(char word[], int count)
-//{
-//    int i = 0, j = 0;
-//    char temp[100] = "";
-//
-//    for (i = 1; i <= count; i++)
-//    {
-//        strcpy(temp, word[i]);
-//
-//        for (j = i - 1; j >= 0 && strlen(word[j]) < strlen(temp); j--)
-//            strcpy(word[j + 1], word[j]);
-//
-//        strcpy(word[j + 1], temp);
-//    }
-//
-//    return;
-//}
+void insertion_sort(char word[][100], int count)
+{
+    int i = 0, j = 0;
+    char temp[100] = "";
+
+    for (i = 1; i < count; i++)
+    {
+        strcpy(temp, word[i]);
+
+        for (j = i - 1; j >= 0 && strlen(word[j]) < strlen(temp); j--)
+            strcpy(word[j + 1], word[j]);
+
+        strcpy(word[j + 1], temp);
+    }
+
+    return;
+}
 
 int main()
 {
@@ -44,19 +44,11 @@ int main()
         }
     }
 
-    for (i = 1; i <= count; i++)
-    {
-        strcpy(temp, word[i]);
-
-        for (j = i - 1; j >= 0 && strlen(word[j]) < strlen(temp); j--)
-            strcpy(word[j + 1], word[j]);
-
-        strcpy(word[j + 1], temp);
-    }
+    insertion_sort(word, count + 1);
 
     printf("%d\n", strlen(str));
 
-    for (i = 0; i <= count + 1; i++)
+    for (i = 0; i < count + 1; i++)
         if (strlen(word[i]) == strlen(word[0]))
             printf("%s ", word[i]);
 

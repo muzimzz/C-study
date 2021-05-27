@@ -3,23 +3,23 @@
 #include <stdio.h>
 #include <string.h>
 
-//void insertion_sort(char word[], int count)
-//{
-//    int i = 0, j = 0;
-//    char temp[100] = "";
-//
-//    for (i = 1; i < count; i++)
-//    {
-//        strcpy(temp, word[i]);
-//
-//        for (j = i - 1; j >= 0 && word[j] < temp; j--)
-//            strcpy(word[j + 1], word[j]);
-//
-//        strcpy(word[j + 1], temp);
-//    }
-//
-//    return;
-//}
+void insertion_sort(char choice[][100], int count)
+{
+    int i = 0, j = 0;
+    char temp[100] = "";
+
+    for (i = 1; i < count; i++)
+    {
+        strcpy(temp, choice[i]);
+
+        for (j = i - 1; j >= 0 && strcmp(choice[j], temp) > 0; j--)
+            strcpy(choice[j + 1], choice[j]);
+
+        strcpy(choice[j + 1], temp);
+    }
+
+    return;
+}
 
 int main()
 {
@@ -41,15 +41,7 @@ int main()
             count++;
         }
 
-    for (i = 1; i < count; i++)
-    {
-        strcpy(temp, choice[i]);
-
-        for (j = i - 1; j >= 0 && strcmp(choice[j], temp) > 0; j--)
-            strcpy(choice[j + 1], choice[j]);
-
-        strcpy(choice[j + 1], temp);
-    }
+    insertion_sort(choice, count);
 
     for (i = 0; i < count; i++)
         printf("%s", choice[i]);

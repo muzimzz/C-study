@@ -1,58 +1,45 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include <string.h>
 
-//void insertion_sort(char choice[], int count)
-//{
-//    int i = 0, j = 0;
-//    char temp[100] = "";
-//
-//    for (i = 1; i < count; i++)
-//    {
-//        strcpy(temp, choice[i]);
-//
-//        for (j = i - 1; j >= 0 && strcmp(choice[j], temp) > 0; j--)
-//            strcpy(choice[j + 1], choice[j]);
-//
-//        strcpy(choice[j + 1], temp);
-//    }
-//
-//    return;
-//}
+void insertion_sort(double list[], int n)
+{
+    int i = 0, j = 0;
+    double temp = 0;
+
+    for (i = 1; i < n; i++)
+    {
+        temp = list[i];
+
+        for (j = i - 1; j >= 0 && list[j] < temp; j--)
+            list[j + 1] = list[j];
+
+        list[j + 1] = temp;
+    }
+
+    return;
+}
 
 int main()
 {
-    char word[10][100] = { 0 };
-    char choice[10][100] = { 0 };
-    char temp[100] = "";
-    int i = 0, j = 0, count = 0;
-    char n = '\0';
+    int size = 0, i = 0, j = 0;
+    double temp = 0;
+    fscanf(stdin, "%d", &size);
 
-    for (i = 0; i<10; i++)
-        fgets(word[i], 100, stdin);
+    int score[100][3] = { 0 };
+    double avg[100] = { 0 };
 
-    fscanf(stdin, "%c", &n);
+    for (i = 0; i < size; i++)
+        for (j = 0; j < 3; j++)
+            fscanf(stdin, "%d", &score[i][j]);
 
-    for (i = 0; i < 10; i++)
-        if (strchr(word[i], n))
-        {
-            strcpy(choice[count], word[i]);
-            count++;
-        }
+    for (i = 0; i < size; i++)
+        avg[i] = (double)(score[i][0] + score[i][1] + score[i][2]) / 3.0;
 
-    for (i = 1; i < count; i++)
-    {
-        strcpy(temp, choice[i]);
+    insertion_sort(avg, size);
 
-        for (j = i - 1; j >= 0 && strcmp(choice[j], temp) > 0; j--)
-            strcpy(choice[j + 1], choice[j]);
-
-        strcpy(choice[j + 1], temp);
-    }
-
-    for (i = 0; i < count; i++)
-        printf("%s", choice[i]);
+    for (i = 0; i < size; i++)
+        printf("%.1lf\n", avg[i]);
 
     return 0;
 }
