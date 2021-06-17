@@ -47,7 +47,7 @@ int hash_function(char* key)
 // dh: Double Hashing (이중 해싱)
 void hash_dh_add(element item, element ht[]) // 테이블에 키를 삽입하는 함수
 {
-	int i = 0, hash_value = 0;
+	int i = 0, hash_value = 0, step = 0;
 
 	hash_value = i = hash_function(item.key);
 	printf("%s의 hash_address = %d\n", item.key, i);
@@ -60,7 +60,8 @@ void hash_dh_add(element item, element ht[]) // 테이블에 키를 삽입하는
 			exit(1);	// 입력값과 동일한 탐색키가 존재하면 종료
 		}
 
-		i = (i + DOUBLE_HASH_SIZE) % TABLE_SIZE;	// 다음 인덱스의 버켓으로 이동
+		step = DOUBLE_HASH_SIZE - (hash_value % DOUBLE_HASH_SIZE);
+		i = (i + step) % TABLE_SIZE;	// 다음 버켓 인덱스 탐색
 
 		if (i == hash_value) // 한 바퀴를 모두 돌아왔을 경우
 		{
